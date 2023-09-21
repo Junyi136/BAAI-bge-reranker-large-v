@@ -1,5 +1,8 @@
 ---
 license: mit
+language:
+- zh
+- en
 ---
 
 
@@ -386,6 +389,3 @@ If you find our work helpful, please cite us:
 
 ## License
 FlagEmbedding is licensed under the [MIT License](https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE). The released models can be used for commercial purposes free of charge.
-
-
-
