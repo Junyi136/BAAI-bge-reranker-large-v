@@ -1,5 +1,8 @@
 ---
 license: mit
+language:
+- zh
+- en
 ---
 
 
@@ -368,6 +371,3 @@ You also can email Shitao Xiao(stxiao@baai.ac.cn) and Zheng Liu(liuzheng@baai.ac
 
 ## License
 FlagEmbedding is licensed under the [MIT License](https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE). The released models can be used for commercial purposes free of charge.
-
-
-
