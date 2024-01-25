@@ -3,6 +3,64 @@ license: mit
 language:
 - zh
 - en
+
+tags:
+- mteb
+model-index:
+- name: bge-reranker-large
+  results:
+  - task:
+      type: Reranking
+    dataset:
+      type: C-MTEB/CMedQAv1-reranking
+      name: MTEB CMedQAv1
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map
+      value: 82.13813829648727
+    - type: mrr
+      value: 84.92349206349207
+  - task:
+      type: Reranking
+    dataset:
+      type: C-MTEB/CMedQAv2-reranking
+      name: MTEB CMedQAv2
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map
+      value: 84.19313276771856
+    - type: mrr
+      value: 86.96876984126984
+  - task:
+      type: Reranking
+    dataset:
+      type: C-MTEB/Mmarco-reranking
+      name: MTEB MMarcoReranking
+      config: default
+      split: dev
+      revision: None
+    metrics:
+    - type: map
+      value: 37.16533876035345
+    - type: mrr
+      value: 36.60039682539682
+  - task:
+      type: Reranking
+    dataset:
+      type: C-MTEB/T2Reranking
+      name: MTEB T2Reranking
+      config: default
+      split: dev
+      revision: None
+    metrics:
+    - type: map
+      value: 67.60068968300665
+    - type: mrr
+      value: 77.68363585560605
 ---
 
 
