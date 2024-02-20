@@ -364,6 +364,52 @@ with torch.no_grad():
     print(scores)
 ```
 
+#### Usage reranker with the ONNX files
+
+```python
+from optimum.onnxruntime import ORTModelForSequenceClassification  # type: ignore
+
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-reranker-large')
+model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-large')
+model_ort = ORTModelForFeatureExtraction.from_pretrained('BAAI/bge-reranker-large', file_name="onnx/model.onnx")
+
+# Sentences we want sentence embeddings for
+pairs = [['what is panda?', 'hi'], ['what is panda?', 'The giant panda (Ailuropoda melanoleuca), sometimes called a panda bear or simply panda, is a bear species endemic to China.']]
+
+# Tokenize sentences
+encoded_input = tokenizer(pairs, padding=True, truncation=True, return_tensors='pt')
+
+scores_ort = model_ort(**inputs, return_dict=True).logits.view(-1, ).float()
+# Compute token embeddings
+with torch.inference_mode():
+    scores = model_ort(**inputs, return_dict=True).logits.view(-1, ).float()
+
+# scores and scores_ort are identical
+```
+#### Usage reranker with infinity
+
+Its also possible to deploy the onnx files with the [infinity_emb](https://github.com/michaelfeil/infinity) pip package.
+```python
+import asyncio
+from infinity_emb import AsyncEmbeddingEngine, EngineArgs
+
+query='what is panda?'
+docs = ['The giant panda (Ailuropoda melanoleuca), sometimes called a panda bear', "Paris is in France."]
+
+engine = AsyncEmbeddingEngine.from_args(
+    EngineArgs(model_name_or_path = "BAAI/bge-large-en-v1.5", device="cpu", engine="optimum" # or engine="torch"
+))
+
+async def main(): 
+    async with engine:
+        ranking, usage = await engine.rerank(query=query, docs=docs)
+        print(list(zip(ranking, docs)))
+asyncio.run(main())
+```
+
 ## Evaluation  
 
 `baai-general-embedding` models achieve **state-of-the-art performance on both MTEB and C-MTEB leaderboard!**
