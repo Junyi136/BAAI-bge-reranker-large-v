@@ -373,8 +373,8 @@ import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-reranker-large')
-model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-large')
-model_ort = ORTModelForFeatureExtraction.from_pretrained('BAAI/bge-reranker-large', file_name="onnx/model.onnx")
+model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-base')
+model_ort = ORTModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-base', file_name="onnx/model.onnx")
 
 # Sentences we want sentence embeddings for
 pairs = [['what is panda?', 'hi'], ['what is panda?', 'The giant panda (Ailuropoda melanoleuca), sometimes called a panda bear or simply panda, is a bear species endemic to China.']]
@@ -382,25 +382,25 @@ pairs = [['what is panda?', 'hi'], ['what is panda?', 'The giant panda (Ailuropo
 # Tokenize sentences
 encoded_input = tokenizer(pairs, padding=True, truncation=True, return_tensors='pt')
 
-scores_ort = model_ort(**inputs, return_dict=True).logits.view(-1, ).float()
+scores_ort = model_ort(**encoded_input, return_dict=True).logits.view(-1, ).float()
 # Compute token embeddings
 with torch.inference_mode():
-    scores = model_ort(**inputs, return_dict=True).logits.view(-1, ).float()
+    scores = model_ort(**encoded_input, return_dict=True).logits.view(-1, ).float()
 
 # scores and scores_ort are identical
 ```
 #### Usage reranker with infinity
 
-Its also possible to deploy the onnx files with the [infinity_emb](https://github.com/michaelfeil/infinity) pip package.
+Its also possible to deploy the onnx/torch files with the [infinity_emb](https://github.com/michaelfeil/infinity) pip package.
 ```python
 import asyncio
 from infinity_emb import AsyncEmbeddingEngine, EngineArgs
 
-query='what is panda?'
+query='what is a panda?'
 docs = ['The giant panda (Ailuropoda melanoleuca), sometimes called a panda bear', "Paris is in France."]
 
 engine = AsyncEmbeddingEngine.from_args(
-    EngineArgs(model_name_or_path = "BAAI/bge-large-en-v1.5", device="cpu", engine="optimum" # or engine="torch"
+    EngineArgs(model_name_or_path = "BAAI/bge-reranker-base", device="cpu", engine="torch" # or engine="optimum" for onnx
 ))
 
 async def main(): 
