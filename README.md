@@ -1,13 +1,13 @@
 ---
 license: mit
 language:
-- zh
 - en
+- zh
 
 tags:
 - mteb
 model-index:
-- name: bge-reranker-large
+- name: bge-reranker-base
   results:
   - task:
       type: Reranking
@@ -19,9 +19,9 @@ model-index:
       revision: None
     metrics:
     - type: map
-      value: 82.13813829648727
+      value: 81.27206722525007
     - type: mrr
-      value: 84.92349206349207
+      value: 84.14238095238095
   - task:
       type: Reranking
     dataset:
@@ -32,9 +32,9 @@ model-index:
       revision: None
     metrics:
     - type: map
-      value: 84.19313276771856
+      value: 84.10369934291236
     - type: mrr
-      value: 86.96876984126984
+      value: 86.79376984126984
   - task:
       type: Reranking
     dataset:
@@ -45,9 +45,9 @@ model-index:
       revision: None
     metrics:
     - type: map
-      value: 37.16533876035345
+      value: 35.4600511272538
     - type: mrr
-      value: 36.60039682539682
+      value: 34.602380952380946
   - task:
       type: Reranking
     dataset:
@@ -58,9 +58,9 @@ model-index:
       revision: None
     metrics:
     - type: map
-      value: 67.60068968300665
+      value: 67.27728847727172
     - type: mrr
-      value: 77.68363585560605
+      value: 77.1315192743764
 ---
 
 
@@ -74,31 +74,33 @@ model-index:
         <a href=#usage>Usage</a>  |
         <a href="#evaluation">Evaluation</a> |
         <a href="#train">Train</a> |
-        <a href="#contact">Contact</a> |
         <a href="#citation">Citation</a> |
         <a href="#license">License</a> 
     <p>
 </h4>
 
-More details please refer to our Github: [FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding).
+**More details please refer to our Github: [FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding).**
 
 
 [English](README.md) | [中文](https://github.com/FlagOpen/FlagEmbedding/blob/master/README_zh.md)
+
 
 FlagEmbedding focuses on retrieval-augmented LLMs, consisting of the following projects currently:
 
 - **Long-Context LLM**: [Activation Beacon](https://github.com/FlagOpen/FlagEmbedding/tree/master/Long_LLM/activation_beacon)
 - **Fine-tuning of LM** : [LM-Cocktail](https://github.com/FlagOpen/FlagEmbedding/tree/master/LM_Cocktail)
-- **Dense Retrieval**: [BGE-M3](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3), [LLM Embedder](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_embedder), [BGE Embedding](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/baai_general_embedding)
-- **Reranker Model**: [BGE Reranker](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker)
+- **Embedding Model**: [Visualized-BGE](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual), [BGE-M3](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3), [LLM Embedder](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_embedder), [BGE Embedding](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/baai_general_embedding)
+- **Reranker Model**: [llm rerankers](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker), [BGE Reranker](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker)
 - **Benchmark**: [C-MTEB](https://github.com/FlagOpen/FlagEmbedding/tree/master/C_MTEB)
 
 ## News 
+- 3/18/2024: Release new [rerankers](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker), built upon powerful M3 and LLM (GEMMA and MiniCPM, not so large actually) backbones, supporitng multi-lingual processing and larger inputs, massive improvements of ranking performances on BEIR, C-MTEB/Retrieval, MIRACL, LlamaIndex Evaluation.
+- 3/18/2024: Release [Visualized-BGE](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual), equipping BGE with visual capabilities. Visualized-BGE can be utilized to generate embeddings for hybrid image-text data.
 - 1/30/2024: Release **BGE-M3**, a new member to BGE model series! M3 stands for **M**ulti-linguality (100+ languages), **M**ulti-granularities (input length up to 8192), **M**ulti-Functionality (unification of dense, lexical, multi-vec/colbert retrieval). 
 It is the first embedding model which supports all three retrieval methods, achieving new SOTA on multi-lingual (MIRACL) and cross-lingual (MKQA) benchmarks.
 [Technical Report](https://github.com/FlagOpen/FlagEmbedding/blob/master/FlagEmbedding/BGE_M3/BGE_M3.pdf) and [Code](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3). :fire:
 - 1/9/2024: Release [Activation-Beacon](https://github.com/FlagOpen/FlagEmbedding/tree/master/Long_LLM/activation_beacon), an effective, efficient, compatible, and low-cost (training) method to extend the context length of LLM. [Technical Report](https://arxiv.org/abs/2401.03462) :fire:
-- 12/24/2023: Release **LLaRA**, a LLaMA-7B based dense retriever, leading to state-of-the-art performances on MS MARCO and BEIR. Model and code will be open-sourced. Please stay tuned. [Technical Report](https://arxiv.org/abs/2312.15503) :fire:
+- 12/24/2023: Release **LLaRA**, a LLaMA-7B based dense retriever, leading to state-of-the-art performances on MS MARCO and BEIR. Model and code will be open-sourced. Please stay tuned. [Technical Report](https://arxiv.org/abs/2312.15503)
 - 11/23/2023: Release [LM-Cocktail](https://github.com/FlagOpen/FlagEmbedding/tree/master/LM_Cocktail), a method to maintain general capabilities during fine-tuning by merging multiple language models. [Technical Report](https://arxiv.org/abs/2311.13534) :fire:  
 - 10/12/2023: Release [LLM-Embedder](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_embedder), a unified embedding model to support diverse retrieval augmentation needs for LLMs. [Technical Report](https://arxiv.org/pdf/2310.07554.pdf)
 - 09/15/2023: The [technical report](https://arxiv.org/pdf/2309.07597.pdf) of BGE has been released 
@@ -164,7 +166,8 @@ Following this [example](https://github.com/FlagOpen/FlagEmbedding/tree/master/e
 Some suggestions:
 - Mine hard negatives following this [example](https://github.com/FlagOpen/FlagEmbedding/tree/master/examples/finetune#hard-negatives), which can improve the retrieval performance.
 - If you pre-train bge on your data, the pre-trained model cannot be directly used to calculate similarity, and it must be fine-tuned with contrastive learning before computing similarity.
-- If the accuracy of the fine-tuned model is still not high, it is recommended to use/fine-tune the cross-encoder model (bge-reranker) to re-rank top-k results. Hard negatives also are needed to fine-tune reranker.
+- If the accuracy of the fine-tuned model is still not high, it is recommended to use/fine-tune the cross-encoder model (bge-reranker) to re-rank top-k results.
+  Hard negatives also are needed to fine-tune reranker. Refer to this [example](https://github.com/FlagOpen/FlagEmbedding/tree/master/examples/reranker) for the fine-tuning for reranker
 
   
 </details>
@@ -503,10 +506,6 @@ The data format is the same as embedding model, so you can fine-tune it easily f
 More details please refer to [./FlagEmbedding/reranker/README.md](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker)
 
 
-## Contact
-If you have any question or suggestion related to this project, feel free to open an issue or pull request.
-You also can email Shitao Xiao(stxiao@baai.ac.cn) and Zheng Liu(liuzheng@baai.ac.cn). 
-
 
 ## Citation
 
@@ -525,4 +524,3 @@ If you find this repository useful, please consider giving a star :star: and cit
 
 ## License
 FlagEmbedding is licensed under the [MIT License](https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE). The released models can be used for commercial purposes free of charge.
-
