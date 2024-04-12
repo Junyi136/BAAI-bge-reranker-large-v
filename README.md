@@ -63,6 +63,7 @@ model-index:
       value: 77.1315192743764
 ---
 
+**We have updated the [new reranker](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker), supporting larger lengths, more languages, and achieving better performance.**
 
 <h1 align="center">FlagEmbedding</h1>
 
