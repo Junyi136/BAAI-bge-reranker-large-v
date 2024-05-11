@@ -3,7 +3,6 @@ license: mit
 language:
 - en
 - zh
-
 tags:
 - mteb
 model-index:
@@ -47,7 +46,7 @@ model-index:
     - type: map
       value: 35.4600511272538
     - type: mrr
-      value: 34.602380952380946
+      value: 34.60238095238095
   - task:
       type: Reranking
     dataset:
@@ -61,6 +60,7 @@ model-index:
       value: 67.27728847727172
     - type: mrr
       value: 77.1315192743764
+pipeline_tag: zero-shot-classification
 ---
 
 **We have updated the [new reranker](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker), supporting larger lengths, more languages, and achieving better performance.**
