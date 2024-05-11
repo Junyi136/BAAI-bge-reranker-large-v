@@ -60,7 +60,7 @@ model-index:
       value: 67.27728847727172
     - type: mrr
       value: 77.1315192743764
-pipeline_tag: zero-shot-classification
+pipeline_tag: feature-extraction
 ---
 
 **We have updated the [new reranker](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker), supporting larger lengths, more languages, and achieving better performance.**
