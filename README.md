@@ -414,6 +414,13 @@ async def main():
 asyncio.run(main())
 ```
 
+For a docker based deployment:
+```bash
+docker run --gpus all -v $PWD/data:/app/.cache -e HF_TOKEN=$HF_TOKEN -p "7997":"7997" \
+michaelf34/infinity:0.0.68 \
+v2 --model-id BAAI/bge-reranker-base --revision "main" --dtype float16 --batch-size 32 --engine torch --port 7997
+```
+
 ## Evaluation  
 
 `baai-general-embedding` models achieve **state-of-the-art performance on both MTEB and C-MTEB leaderboard!**
